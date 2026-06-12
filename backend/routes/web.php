@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Pages\Auth\Login;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', Login::class)->name('login');
