@@ -1,7 +1,7 @@
 import 'package:frontend/app.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +15,20 @@ class LoginScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              const SizedBox(height: 60),
+
+              const SizedBox(height: 10),
 
               Image.asset(
                 AppAssets.logoicon,
                 height: 80,
               ),
 
-              const SizedBox(height: 50),
+              const SizedBox(height: 40),
 
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Login to your Account",
+                  "Create your Account",
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w600,
@@ -49,13 +50,25 @@ class LoginScreen extends StatelessWidget {
                 decoration: _inputDecoration("Password"),
               ),
 
+              const SizedBox(height: 15),
+
+              TextField(
+                obscureText: true,
+                decoration: _inputDecoration("Confirm Password"),
+              ),
+
               const SizedBox(height: 25),
 
               SizedBox(
                 width: double.infinity,
                 height: 55,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.username,
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     elevation: 5,
@@ -64,7 +77,8 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   child: const Text(
-                    "Sign In",
+                    "Sign Up",
+
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -76,7 +90,7 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 80),
 
               const Text(
-                "- Or sign in with -",
+                "- Or sign up with -",
                 style: TextStyle(
                   color: AppColors.grey,
                 ),
@@ -99,17 +113,17 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Don't have an account? ",
+                    "Already have an account? ",
                   ),
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        AppRoutes.register,
+                        AppRoutes.login,
                       );
                     },
                     child: const Text(
-                      "Sign Up",
+                      "Sign In",
                       style: TextStyle(
                         color: AppColors.primary,
                         fontWeight: FontWeight.bold,
@@ -149,29 +163,32 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  static Widget _socialButton(String imagePath) {
-    return Container(
-      width: 90,
-      height: 50,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: AppColors.border,
+  Widget _socialButton(String imagePath) {
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        width: 90,
+        height: 50,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: AppColors.border,
+          ),
+          borderRadius: BorderRadius.circular(8),
         ),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Center(
-        child: imagePath.endsWith('.svg')
-            ? SvgPicture.asset(
-                imagePath,
-                height: 24,
-              )
-            : Image.asset(
-                imagePath,
-                height: 24,
-                errorBuilder: (context, error, stackTrace) {
-                  return const Icon(Icons.error_outline, size: 24);
-                },
-              ),
+        child: Center(
+          child: imagePath.toLowerCase().endsWith('.svg')
+              ? SvgPicture.asset(
+                  imagePath,
+                  height: 24,
+                )
+              : Image.asset(
+                  imagePath,
+                  height: 24,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(Icons.error_outline, size: 24);
+                  },
+                ),
+        ),
       ),
     );
   }

@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import '../routes/route_generator.dart';
-import 'routes/app_routes.dart';
+import 'package:frontend/app.dart';
 
 void main() {
   runApp(const MyApp());
