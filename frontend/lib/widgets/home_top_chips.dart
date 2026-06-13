@@ -1,16 +1,27 @@
 import 'package:frontend/app.dart';
 
 class HomeTopChips extends StatelessWidget {
-  const HomeTopChips({super.key});
+  final VoidCallback? onAvatarTap;
 
-  Widget _chip(String text, bool selected) {
+  const HomeTopChips({
+    super.key,
+    this.onAvatarTap,
+  });
+
+  Widget _chip(BuildContext context, String text, bool selected) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: selected ? Colors.green : Colors.grey[800],
+        color: selected ? theme.colorScheme.primary : theme.colorScheme.surfaceVariant,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Text(text, style: const TextStyle(color: Colors.white)),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: selected ? theme.colorScheme.onPrimary : theme.colorScheme.onSurface,
+        ),
+      ),
     );
   }
 
@@ -18,13 +29,24 @@ class HomeTopChips extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const CircleAvatar(child: Text("N")),
+        GestureDetector(
+          onTap: onAvatarTap,
+          child: CircleAvatar(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            child: Text(
+              "N",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+            ),
+          ),
+        ),
         const SizedBox(width: 10),
-        _chip("All", true),
+        _chip(context, "All", true),
         const SizedBox(width: 8),
-        _chip("Music", false),
+        _chip(context, "Music", false),
         const SizedBox(width: 8),
-        _chip("Podcasts", false),
+        _chip(context, "Podcasts", false),
       ],
     );
   }

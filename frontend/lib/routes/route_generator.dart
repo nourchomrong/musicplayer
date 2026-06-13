@@ -23,6 +23,21 @@ class RouteGenerator {
           builder: (_) => const UsernameScreen(),
         );
 
+      case AppRoutes.forgetPassword:
+        return MaterialPageRoute(
+          builder: (_) => const ForgetPasswordScreen(),
+        );
+
+      case AppRoutes.verifyCode:
+        return MaterialPageRoute(
+          builder: (_) => const VerifyCodeScreen(),
+        );
+
+      case AppRoutes.resetPassword:
+        return MaterialPageRoute(
+          builder: (_) => const ResetPasswordScreen(),
+        );
+
       case AppRoutes.home:
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),

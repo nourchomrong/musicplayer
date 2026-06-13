@@ -1,7 +1,6 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
-import '../../routes/app_routes.dart';
-import '../../core/constants/app_assets.dart';
+import 'package:frontend/app.dart';
+import 'package:frontend/controller/auth_controller.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,13 +13,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    _checkLoginStatus();
+  }
 
-    Timer(const Duration(seconds: 5), () {
-      Navigator.pushReplacementNamed(
-        context,
-        AppRoutes.login,
-      );
-    });
+  Future<void> _checkLoginStatus() async {
+    final authController = Provider.of<AuthController>(context, listen: false);
+    await authController.loadToken();
+
+    // show splash for 5 seconds
+    await Future.delayed(const Duration(seconds: 5));
+
+    final routeName = authController.isAuthenticated ? AppRoutes.home : AppRoutes.login;
+
+    if (!mounted) return;
+    Navigator.pushReplacementNamed(context, routeName);
   }
 
   @override

@@ -8,11 +8,14 @@ class StationCard extends StatelessWidget {
     return Container(
       width: 140,
       margin: const EdgeInsets.only(right: 10),
-      color: Colors.orange,
-      child: const Center(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Center(
         child: Text(
           "RADIO",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
         ),
       ),
     );

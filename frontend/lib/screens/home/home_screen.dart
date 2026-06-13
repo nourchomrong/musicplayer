@@ -1,12 +1,50 @@
 import 'package:frontend/app.dart';
+import 'package:frontend/controller/auth_controller.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _openDrawer() {
+    _scaffoldKey.currentState?.openDrawer();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final themeController = Provider.of<ThemeController>(context);
+    final authController = Provider.of<AuthController>(context, listen: false);
+
     return Scaffold(
-      backgroundColor: const Color(0xFF121212),
+      key: _scaffoldKey,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      drawer: AppDrawer(
+        username: 'User',
+        isDarkMode: themeController.isDarkMode,
+        onThemeToggle: (enabled) => themeController.setDarkMode(enabled),
+        onProfileTap: () {
+          Navigator.pop(context);
+          // TODO: navigate to profile
+        },
+        onRecentTap: () {
+          Navigator.pop(context);
+          // TODO: navigate to recent
+        },
+        onSettingsTap: () {
+          Navigator.pop(context);
+          // TODO: navigate to settings
+        },
+        onLogoutTap: () async {
+          Navigator.pop(context);
+          await authController.logout();
+          Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
+        },
+      ),
 
       body: SafeArea(
         child: SingleChildScrollView(
@@ -16,7 +54,7 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
-                const HomeTopChips(),
+                HomeTopChips(onAvatarTap: _openDrawer),
 
                 const SizedBox(height: 20),
 
@@ -39,10 +77,10 @@ class HomeScreen extends StatelessWidget {
 
                 const SizedBox(height: 25),
 
-                const Text(
+                Text(
                   "It’s New Music Friday!",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Theme.of(context).textTheme.headlineSmall?.color,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
@@ -64,10 +102,10 @@ class HomeScreen extends StatelessWidget {
 
                 const SizedBox(height: 25),
 
-                const Text(
+                Text(
                   "Recommended Stations",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Theme.of(context).textTheme.headlineSmall?.color,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),

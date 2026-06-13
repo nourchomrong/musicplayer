@@ -5,18 +5,28 @@ class MusicCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       width: 160,
       margin: const EdgeInsets.only(right: 10),
-      color: Colors.grey[850],
-      child: const Column(
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
         children: [
-          Expanded(child: Icon(Icons.image, size: 60, color: Colors.white)),
+          Expanded(
+            child: Icon(
+              Icons.image,
+              size: 60,
+              color: theme.colorScheme.onSurface,
+            ),
+          ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Text(
               "New Music Friday",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: theme.colorScheme.onSurface),
             ),
           )
         ],

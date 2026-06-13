@@ -5,9 +5,15 @@ class AppColors {
 
   static const secondary = Color(0xFF4A90E2);
 
-  static const background = Colors.white;
-  static const grey = Colors.grey;
+  static const lightBackground = Colors.white;
+  static const darkBackground = Color(0xFF121212);
+  static const background = lightBackground;
+
+  static const lightSurface = Color(0xFFF5F6FA);
+  static const darkSurface = Color(0xFF1E1E1E);
+
   static const border = Color(0xFFEAEAEA);
+  static const grey = Color(0xFF6B7280);
 
   static const textPrimary = Color(0xFF222222);
 

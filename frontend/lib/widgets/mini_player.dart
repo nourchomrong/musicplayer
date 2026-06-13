@@ -5,20 +5,21 @@ class MiniPlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(10),
-      color: const Color(0xFF1E1E1E),
-      child: const Row(
+      color: theme.colorScheme.surface,
+      child: Row(
         children: [
-          Icon(Icons.music_note, color: Colors.white),
-          SizedBox(width: 10),
+          Icon(Icons.music_note, color: theme.colorScheme.onSurface),
+          const SizedBox(width: 10),
           Expanded(
             child: Text(
               "1Out1 - La Cima",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: theme.colorScheme.onSurface),
             ),
           ),
-          Icon(Icons.play_arrow, color: Colors.white),
+          Icon(Icons.play_arrow, color: theme.colorScheme.onSurface),
         ],
       ),
     );
